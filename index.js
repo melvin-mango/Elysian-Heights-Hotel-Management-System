@@ -11,6 +11,11 @@ app.get('/', function (request, response){
     response.render('home');
 });
 
+app.get('/receptionist/dashboard', (request, response) =>{
+    response.render('receptionist/dashboard');
+});
+
+
 
 
 app.listen(port);
