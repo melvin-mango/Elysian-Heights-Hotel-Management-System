@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "status": "Available"
+  },
+  {
+    "id": 2,
+    "status": "Occupied"
+  },
+  {
+    "id": 3,
+    "status": "Needs Cleaning"
+  }
+]

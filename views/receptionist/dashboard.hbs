@@ -4,55 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <title>Home</title>
-    <style>
-      
-    </style>
+    <title>Receptionist Dashboard</title>
 </head>
-<body>
-    <nav class="flex item-center h-20 w-screen bg-yellow-800 justify-between p-5">
-        <a href="" class="text-white">
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="flex items-center h-20 w-screen bg-yellow-800 justify-between p-5">
+        <a href="#" class="text-white">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-  <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-</svg>
+                <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+            </svg>
         </a>
         <p class="text-white font-bold">Receptionist</p>
-
-        <div class="flex item-center justtify-between space-x-4">
-        <a href="">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
-  <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
-</svg>
-
-        </a>
-
-        <a href="">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
-  <path d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z" />
-  <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 0 0 5.25 9v.75a8.217 8.217 0 0 1-2.119 5.52.75.75 0 0 0 .298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 1 0 7.48 0 24.583 24.583 0 0 0 4.83-1.244.75.75 0 0 0 .298-1.205 8.217 8.217 0 0 1-2.118-5.52V9A6.75 6.75 0 0 0 12 2.25ZM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 0 0 4.496 0l.002.1a2.25 2.25 0 1 1-4.5 0Z" clip-rule="evenodd" />
-</svg>
-        </a>
-</div>
+        <div class="flex items-center space-x-4">
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
+                    <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
+                    <path d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z" />
+                    <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 0 0 5.25 9v.75a8.217 8.217 0 0 1-2.119 5.52.75.75 0 0 0 .298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 1 0 7.48 0 24.583 24.583 0 0 0 4.83-1.244.75.75 0 0 0 .298-1.205 8.217 8.217 0 0 1-2.118-5.52V9A6.75 6.75 0 0 0 12 2.25ZM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 0 0 4.496 0l.002.1a2.25 2.25 0 1 1-4.5 0Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
     </nav>
 
-<p>Receptionist Dashboard</p>
+    <!-- Dashboard Heading -->
+    <div class="container mx-auto px-4 py-6">
+        <h1 class="text-2xl font-bold mb-6">Receptionist Dashboard</h1>
 
-<div class="flex items-center justify-around space-x-2 p-2">
-        <div class="w-1/3 h-24 p-2 items-center justify-center flex flex-col bg-stone-500 space-y-4">
-            <p class="text-center">Available Rooms </p>
-            <p>0</p>
+        <!-- Room Status Overview -->
+        <div class="grid grid-cols-3 gap-6 mb-10">
+            <div class="bg-yellow-700 text-white p-4 rounded shadow">
+                <h2 class="text-lg">Available Rooms</h2>
+                <p class="text-3xl font-bold">{{availableRooms}}</p>
+            </div>
+            <div class="bg-yellow-700 text-white p-4 rounded shadow">
+                <h2 class="text-lg">Occupied Rooms</h2>
+                <p class="text-3xl font-bold">{{occupiedRooms}}</p>
+            </div>
+            <div class="bg-yellow-700 text-white p-4 rounded shadow">
+                <h2 class="text-lg">Needs Cleaning</h2>
+                <p class="text-3xl font-bold">{{needsCleaning}}</p>
+            </div>
         </div>
-        <div class="w-1/3 h-24 p-2 items-center justify-center flex flex-col bg-stone-500 space-y-4">
-            <p class="text-center">Occupied Rooms</p>
-            <p>0</p>
+
+        <!-- Check-in Form -->
+        <div class="bg-white p-6 rounded shadow mb-10">
+            <h2 class="text-xl font-bold mb-4">Check-in Guest</h2>
+            <form action="/receptionist/checkin" method="POST" class="space-y-4">
+                <div>
+                    <label for="guestName" class="block text-sm font-medium">Guest Name</label>
+                    <input type="text" name="guestName" id="guestName" required class="w-full border rounded px-3 py-2">
+                </div>
+                <div>
+                    <label for="roomNumber" class="block text-sm font-medium">Room Number</label>
+                    <input type="number" name="roomNumber" id="roomNumber" required class="w-full border rounded px-3 py-2">
+                </div>
+                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Check In</button>
+            </form>
         </div>
-        <div class="w-1/3 h-24 p-2 items-center justify-center flex flex-col bg-stone-500 space-y-4">
-            <p class="text-center">Needs Cleaning</p>
-            <p>0</p>
 
+        <!-- Add Cleaning Request -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-bold mb-4">Add Cleaning Request</h2>
+            <form action="/receptionist/cleaning" method="POST" class="space-y-4">
+                <div>
+                    <label for="cleaningRoomNumber" class="block text-sm font-medium">Room Number</label>
+                    <input type="number" name="roomNumber" id="cleaningRoomNumber" required class="w-full border rounded px-3 py-2">
+                </div>
+                <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded">Add Request</button>
+            </form>
         </div>
-
-
-</div>
+    </div>
 </body>
 </html>

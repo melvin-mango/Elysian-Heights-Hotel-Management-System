@@ -1,15 +1,22 @@
 {
   "name": "elysian_hotel",
   "version": "1.0.0",
-  "description": "",
+  "description": "A hotel management system for check-ins, room assignments, and housekeeping.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.3",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "hbs": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

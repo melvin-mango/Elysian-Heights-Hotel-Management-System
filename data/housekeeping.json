@@ -1,0 +1,12 @@
+{
+    "cleaningTasks": [
+        {
+            "roomNumber": 101,
+            "status": "Needs Cleaning"
+        },
+        {
+            "roomNumber": 202,
+            "status": "Occupied"
+        }
+    ]
+}
