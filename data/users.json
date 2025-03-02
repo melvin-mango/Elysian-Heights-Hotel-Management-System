@@ -3,41 +3,48 @@
       {
         "username": "admin@example.com",
         "name": "Admin",
-        "password": "admin123"
+        "password": "admin123",
+        "role": "admin"
       }
     ],
     "receptionists": [
       {
-        "username": "johndoe@gmail.com",
-        "name": "John Doe",
-        "password": "reception123"
+        "username": "ronaldregan@gmail.com",
+        "name": "Ronald Regan",
+        "password": "reception123",
+        "role": "receptionists"
       },
       {
         "username": "alicebrown@gmail.com",
         "name": "Alice Brown",
-        "password": "reception456"
+        "password": "reception456",
+        "role": "receptionists"
       },
       {
         "username": "markwilson@gmail.com",
         "name": "Mark Wilson",
-        "password": "reception789"
+        "password": "reception789",
+        "role": "receptionists"
       }
     ],
     "housekeeping": [
       {
         "username": "janesmith@gmail.com",
         "name": "Jane Smith",
-        "password": "housekeeping123"
+        "password": "housekeeping123",
+        "role": "housekeeping"
       },
       {
         "username": "emilydavis@gmail.com",
         "name": "Emily Davis",
-        "password": "housekeeping456"
+        "password": "housekeeping456",
+        "role": "housekeeping"
       },
       {
         "username": "roberttaylor@gmail.com",
         "name": "Robert Taylor",
-        "password": "housekeeping789"
+        "password": "housekeeping789",
+        "role": "housekeeping"
       }
     ]
   }

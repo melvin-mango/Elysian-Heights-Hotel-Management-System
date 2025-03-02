@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <title>Home</title>
+    <title>Special Request</title>
     <style>
       
     </style>
@@ -25,7 +25,7 @@
        
 
         <div class="flex item-center justtify-between space-x-4">
-        <a href="">
+        <a href="#" onclick="openChat()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
   <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
 </svg>
@@ -40,7 +40,155 @@
         </a>
 </div>
     </nav>
+<!-- Chat Modal -->
+<div id="chatModal" class="hidden fixed inset-0 bg-[#6040204d] bg-opacity-90 flex justify-center items-center">
+    <div class="bg-white rounded-lg shadow-lg w-96">
+        <!-- Chat Header -->
+        <div class="flex justify-between items-center px-4 py-2 border-b bg-[#604020] text-white">
+            <h2 class="text-lg font-semibold">Group Chat</h2>
+            <button onclick="closeChat()" class="text-white text-2xl">&times;</button>
+        </div>
 
+        <!-- Chat Messages -->
+        <div id="chatBox" class="p-4 h-64 overflow-y-auto space-y-2 bg-gray-100">
+            <!-- Messages will be added here dynamically -->
+        </div>
+
+        <!-- Chat Input -->
+        <div class="flex items-center p-4 border-t">
+            <input type="text" id="messageInput" placeholder="Type a message..."
+                class="flex-1 p-2 border rounded-md focus:outline-none focus:ring focus:ring-gray-400">
+            <button onclick="sendMessage()"
+                class="ml-2 bg-[#604020] text-white px-4 py-2 rounded-md hover:bg-opacity-90">
+                Send
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Assume the receptionist is already logged in (for now, we'll use a hardcoded username
+
+    function openChat() {
+        document.getElementById('chatModal').classList.remove('hidden');
+    }
+
+    function closeChat() {
+        document.getElementById('chatModal').classList.add('hidden');
+    }
+
+
+    let loggedInUsername = "";
+
+// Fetch logged-in user's name
+function getCurrentUser() {
+    fetch('/current-user')
+        .then(response => response.json())
+        .then(data => {
+            if (data.username) {
+                loggedInUsername = data.username;
+            } else {
+                alert("Session expired. Please log in again.");
+                window.location.href = "/login";
+            }
+        })
+        .catch(error => console.error("Error fetching user:", error));
+}
+
+// Load chat messages
+function loadMessages() {
+    fetch("/messages")
+        .then(response => response.json())
+        .then(messages => {
+            const chatBox = document.getElementById("chatBox");
+            chatBox.innerHTML = "";
+            messages.forEach(msg => displayMessage(msg.username, msg.message));
+        })
+        .catch(error => console.error("Error loading messages:", error));
+}
+
+ function displayMessage(username, message) {
+    const chatBox = document.getElementById("chatBox");
+
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("flex", "mb-2", "items-end");
+
+    // Different styling for sent and received messages
+    if (username === loggedInUsername) {
+        messageDiv.classList.add("justify-end");
+    }
+
+    // Avatar
+    const avatar = document.createElement("div");
+    avatar.classList.add("w-8", "h-8", "rounded-full", "bg-gray-300", "flex", "items-center", "justify-center", "text-sm", "font-bold", "mr-2");
+    avatar.textContent = username[0].toUpperCase(); // First letter as avatar
+
+    const messageContainer = document.createElement("div");
+    messageContainer.classList.add("max-w-xs", "px-4", "py-2", "bg-[#604020]","rounded-lg", "shadow-md", "relative");
+
+    if (username === loggedInUsername) {
+        messageContainer.classList.add("#604020", "text-white", "rounded-br-none");
+    } else {
+        messageContainer.classList.add("bg-white", "text-gray-800", "rounded-bl-none");
+    }
+
+    const usernameHeader = document.createElement("div");
+    usernameHeader.classList.add("text-xs", "font-semibold", "text-White", "mb-1");
+    usernameHeader.textContent = username;
+
+    const messageContent = document.createElement("p");
+    messageContent.textContent = message;
+
+    const timestamp = document.createElement("span");
+    timestamp.classList.add("text-xs", "absolute", "bottom-0", "right-2", "white","mt-2");
+    timestamp.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    messageContainer.appendChild(usernameHeader);
+    messageContainer.appendChild(messageContent);
+    messageContainer.appendChild(timestamp);
+
+    if (username !== loggedInUsername) {
+        messageDiv.appendChild(avatar); // Show avatar only for received messages
+    }
+    messageDiv.appendChild(messageContainer);
+
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the latest message
+}
+
+// Send message
+function sendMessage() {
+    const messageInput = document.getElementById("messageInput");
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== "" && loggedInUsername !== "") {
+        fetch("/messages", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: messageText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayMessage(loggedInUsername, messageText);
+                messageInput.value = "";
+            }
+        })
+        .catch(error => console.error("Error sending message:", error));
+    } else {
+        alert("You must be logged in to send messages.");
+    }
+}
+
+// Initialize chat
+document.addEventListener("DOMContentLoaded", () => {
+    getCurrentUser();
+    loadMessages();
+});
+
+
+ 
+</script>
      <!-- Sidebar -->
         <div 
             class="fixed top-0 left-0 w-50 sm:w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out"
@@ -60,7 +208,7 @@
                 <a href="/housekeeping/unclean" class="block px-4 py-2 text-white text-xl ">Unclean Rooms</a>
                 <a href="/housekeeping/pending" class="block px-4 py-2 text-white text-xl " >Pending Rooms</a>
                 <a href="/housekeeping/specialrequest" class="block px-4 py-2 text-white text-xl "  style="background-color: #cc99664a; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">Special Requests</a>
-                <a href="#" class="block px-4 py-2 text-white text-l font-semibold  mt-4">Log Out</a>
+                <a href="/logout" class="block px-4 py-2 text-white text-l font-semibold  mt-4">Log Out</a>
             </nav>
             </div>
 
@@ -76,34 +224,56 @@
             <th class="p-3 text-left">Room No.</th>
             <th class="p-3 text-left">Description</th>
             <th class="p-3 text-left">Status</th>
-            <th class="p-3 text-left">Action</th>
+            <th class="p-3 text-left hidden sm:table-cell">Action</th>
         </tr>
     </thead>
-    <tbody class="bg-white divide-y divide-gray-200">
-        {{#each rooms}}
-<tr class="hover:bg-gray-100 transition">
-    <td class="p-3 border">{{this.roomNo}}</td>
-    <td class="p-3 border">{{this.description}}</td>
-    <td class="p-3 border font-semibold">{{this.status}}</td>
-    <td class="p-3 border text-center">
-        <button onclick="updateStatus('{{this.roomNo}}', 'Clean')" 
-            class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition">
-            Clean
-        </button>
-        <button onclick="updateStatus('{{this.roomNo}}', 'Unclean')" 
-            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition mx-1">
-            Unclean
-        </button>
-        <button onclick="updateStatus('{{this.roomNo}}', 'Pending')" 
-            class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition">
-            Pending
-        </button>
-    </td>
-</tr>
-{{/each}}
-    
+   <tbody class="bg-white divide-y divide-gray-200">
+    {{#each rooms}}
+    <tr class="hover:bg-gray-100 transition">
+        <td class="p-3 border">{{this.roomNumber}}</td> <!-- Use roomNumber -->
+        <td class="p-3 border">{{this.description}}</td>
+        <td class="p-3 border font-semibold">{{this.status}}</td>
+        <td class="p-3 border hidden sm:table-cell text-center">
+            <button onclick="updateStatus('{{this.roomNumber}}', 'Complete')" 
+                class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition">
+                Complete
+            </button>
+            <button onclick="updateStatus('{{this.roomNumber}}', 'Pending')" 
+                class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition mx-1">
+                Pending
+            </button>
+            <button onclick="updateStatus('{{this.roomNumber}}', 'Cancelled')" 
+                class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+                Cancelled
+            </button>
+        </td>
+    </tr>
+    {{/each}}
 </tbody>
+
 </table> 
+
+<script>
+    function updateStatus(roomNumber, newStatus) {
+    fetch('/update-specialrequest-status', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ roomNumber, newStatus })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload(); // Refresh to reflect changes
+        } else {
+            alert("Failed to update room status.");
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
 
        
 

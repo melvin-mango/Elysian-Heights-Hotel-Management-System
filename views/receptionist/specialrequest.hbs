@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <title>Home</title>
+    <title>Special Request</title>
     <style>
       
     </style>
@@ -139,8 +139,7 @@
 </div>
 
 <script>
-    // Assume the receptionist is already logged in (for now, we'll use a hardcoded username)
-    let receptionistUsername = "Receptionist_01"; // This should come from login data
+    // Assume the receptionist is already logged in (for now, we'll use a hardcoded username
 
     function openChat() {
         document.getElementById('chatModal').classList.remove('hidden');
@@ -150,39 +149,117 @@
         document.getElementById('chatModal').classList.add('hidden');
     }
 
-    function sendMessage() {
-        const messageInput = document.getElementById('messageInput');
-        const messageText = messageInput.value.trim();
-        
-        if (messageText !== "") {
-            const chatBox = document.getElementById('chatBox');
 
-            // Create message container
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('bg-white', 'p-2', 'rounded-lg', 'shadow', 'max-w-xs', 'self-end');
+    let loggedInUsername = "";
 
-            // Create username header (small text like WhatsApp)
-            const usernameHeader = document.createElement('div');
-            usernameHeader.classList.add('text-xs', 'text-gray-500', 'mb-1', 'font-medium');
-            usernameHeader.textContent = receptionistUsername; // Show logged-in username
+// Fetch logged-in user's name
+function getCurrentUser() {
+    fetch('/current-user')
+        .then(response => response.json())
+        .then(data => {
+            if (data.username) {
+                loggedInUsername = data.username;
+            } else {
+                alert("Session expired. Please log in again.");
+                window.location.href = "/login";
+            }
+        })
+        .catch(error => console.error("Error fetching user:", error));
+}
 
-            // Create message content
-            const messageContent = document.createElement('div');
-            messageContent.classList.add('text-black');
-            messageContent.textContent = messageText;
+// Load chat messages
+function loadMessages() {
+    fetch("/messages")
+        .then(response => response.json())
+        .then(messages => {
+            const chatBox = document.getElementById("chatBox");
+            chatBox.innerHTML = "";
+            messages.forEach(msg => displayMessage(msg.username, msg.message));
+        })
+        .catch(error => console.error("Error loading messages:", error));
+}
 
-            // Append username and message to message container
-            messageDiv.appendChild(usernameHeader);
-            messageDiv.appendChild(messageContent);
+ function displayMessage(username, message) {
+    const chatBox = document.getElementById("chatBox");
 
-            // Append message to chat
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("flex", "mb-2", "items-end");
 
-            // Clear input field
-            messageInput.value = "";
-        }
+    // Different styling for sent and received messages
+    if (username === loggedInUsername) {
+        messageDiv.classList.add("justify-end");
     }
+
+    // Avatar
+    const avatar = document.createElement("div");
+    avatar.classList.add("w-8", "h-8", "rounded-full", "bg-gray-300", "flex", "items-center", "justify-center", "text-sm", "font-bold", "mr-2");
+    avatar.textContent = username[0].toUpperCase(); // First letter as avatar
+
+    const messageContainer = document.createElement("div");
+    messageContainer.classList.add("max-w-xs", "px-4", "py-2", "bg-[#604020]","rounded-lg", "shadow-md", "relative");
+
+    if (username === loggedInUsername) {
+        messageContainer.classList.add("#604020", "text-white", "rounded-br-none");
+    } else {
+        messageContainer.classList.add("bg-white", "text-gray-800", "rounded-bl-none");
+    }
+
+    const usernameHeader = document.createElement("div");
+    usernameHeader.classList.add("text-xs", "font-semibold", "text-White", "mb-1");
+    usernameHeader.textContent = username;
+
+    const messageContent = document.createElement("p");
+    messageContent.textContent = message;
+
+    const timestamp = document.createElement("span");
+    timestamp.classList.add("text-xs", "absolute", "bottom-0", "right-2", "white","mt-2");
+    timestamp.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    messageContainer.appendChild(usernameHeader);
+    messageContainer.appendChild(messageContent);
+    messageContainer.appendChild(timestamp);
+
+    if (username !== loggedInUsername) {
+        messageDiv.appendChild(avatar); // Show avatar only for received messages
+    }
+    messageDiv.appendChild(messageContainer);
+
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the latest message
+}
+
+// Send message
+function sendMessage() {
+    const messageInput = document.getElementById("messageInput");
+    const messageText = messageInput.value.trim();
+
+    if (messageText !== "" && loggedInUsername !== "") {
+        fetch("/messages", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: messageText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayMessage(loggedInUsername, messageText);
+                messageInput.value = "";
+            }
+        })
+        .catch(error => console.error("Error sending message:", error));
+    } else {
+        alert("You must be logged in to send messages.");
+    }
+}
+
+// Initialize chat
+document.addEventListener("DOMContentLoaded", () => {
+    getCurrentUser();
+    loadMessages();
+});
+
+
+ 
 </script>
 
 
@@ -210,7 +287,7 @@
                 <a href="/receptionist/roomstatus" class="block px-4 py-2 text-white text-xl ">Room Status</a>
                 <a href="/receptionist/rooms" class="block px-4 py-2 text-white text-xl ">Rooms</a>
                 <a href="/receptionist/specialrequest" class="block px-4 py-2 text-white text-xl " style="background-color: #cc99664a; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;"class="block px-4 py-2 text-white text-xl ">Special Request</a>
-                <a href="#" class="block px-4 py-2 text-white text-l font-semibold  mt-4">Log Out</a>
+                <a href="/logout" class="block px-4 py-2 text-white text-l font-semibold  mt-4">Log Out</a>
             </nav>
             </div>
 
@@ -219,8 +296,7 @@
 
 <div class="space-y-6 md:px-10 lg:px-20 xl:px-40 2xl:px-60">
     <p class="text-2xl font-bold italic mt-2 ml-2" style="color: #231302; box-shadow:">Special Request</p>
-
-<form class="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-lg">
+<form id="special-request-form" class="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-lg">
     <h2 class="text-xl font-semibold mb-4 text-gray-700">Special Request Form</h2>
 
     <!-- Room Number Dropdown -->
@@ -245,22 +321,72 @@
 </form>
 
 <script>
-    // Fetch room numbers from JSON file
-    fetch('/rooms.json') // Ensure rooms.json is in your public directory
+    // Fetch room numbers from rooms.json located in the 'data' folder
+    fetch('/data/rooms.json') // Correct path to the rooms.json file in the data folder
         .then(response => response.json())
         .then(data => {
-            const roomDropdown = document.getElementById("roomNo");
-            roomDropdown.innerHTML = '<option value="" disabled selected>Select Room</option>';
-            data.forEach(room => {
-                const option = document.createElement("option");
-                option.value = room.roomNo;
-                option.textContent = room.roomNo;
-                roomDropdown.appendChild(option);
-            });
-        })
-        .catch(error => console.error("Error fetching room data:", error));
-</script>
+            console.log(data);  // Log the data to inspect its structure
 
+            // Check if the data has the "rooms" key and is an array
+            if (data.rooms && Array.isArray(data.rooms)) {
+                const roomDropdown = document.getElementById("roomNo");
+                roomDropdown.innerHTML = '<option value="" disabled selected>Select Room</option>';
+                data.rooms.forEach(room => {
+                    const option = document.createElement("option");
+                    option.value = room.roomNumber;
+                    option.textContent = room.roomNumber;
+                    roomDropdown.appendChild(option);
+                });
+            } else {
+                console.error("Expected 'rooms' array, but received:", data);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching room data:", error);
+        });
+
+    // Handle form submission to update specialrequest.json
+    document.getElementById("special-request-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const roomNo = document.getElementById("roomNo").value;
+        const description = document.getElementById("description").value;
+
+        if (!roomNo || !description) {
+            alert("Please select a room and enter a description.");
+            return;
+        }
+
+        // Prepare data to send to the backend
+        const requestData = {
+            roomNo: roomNo,
+            description: description,
+            status: "pending" // Default status as 'pending'
+        };
+
+        // Send data to the backend to update specialrequest.json
+        fetch('/specialrequest', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Special request submitted successfully!');
+                document.getElementById("special-request-form").reset();
+            } else {
+                alert('Failed to submit request.');
+            }
+        })
+        .catch(error => {
+            console.error("Error submitting special request:", error);
+            alert("There was an error submitting the request.");
+        });
+    });
+</script>
 
 
        

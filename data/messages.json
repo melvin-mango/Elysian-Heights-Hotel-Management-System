@@ -1,0 +1,37 @@
+[
+  {
+    "username": "ronaldregan@gmail.com",
+    "message": "Hello Everyone",
+    "timestamp": "2025-03-02T20:39:51.574Z"
+  },
+  {
+    "username": "ronaldregan@gmail.com",
+    "message": "Hello",
+    "timestamp": "2025-03-02T20:52:22.050Z"
+  },
+  {
+    "username": "janesmith@gmail.com",
+    "message": "Hello",
+    "timestamp": "2025-03-02T21:51:45.343Z"
+  },
+  {
+    "username": "ronaldregan@gmail.com",
+    "message": "Room Number 202 Needs cleaning urgently. Please finish up on room number 201 as well. Guests need to go in their rooms",
+    "timestamp": "2025-03-02T22:01:38.347Z"
+  },
+  {
+    "username": "janesmith@gmail.com",
+    "message": "Alright",
+    "timestamp": "2025-03-02T22:02:25.887Z"
+  },
+  {
+    "username": "janesmith@gmail.com",
+    "message": "Room 202 cleaning is on progress. Room 201 is already cleaned",
+    "timestamp": "2025-03-02T22:03:47.638Z"
+  },
+  {
+    "username": "ronaldregan@gmail.com",
+    "message": "Alright thank you for the feedback",
+    "timestamp": "2025-03-02T22:05:02.605Z"
+  }
+]

@@ -68,12 +68,12 @@
 
 
     <div class="pl-5 w-70 lg:mt-10 lg:w-100 lg:pl-20 sm:pl-10 pr-0 mb-0">
-    <form class="space-y-6" action="#" method="POST">
+    <form class="space-y-6" action="/login" method="POST">
     <div class="border-slate-200 border-1 bg-white rounded-lg p-5 space-y-6">
       <div>
         <label for="email" class="block sm:text-sm/6 text-sm font-medium text-gray-900">Username</label>
         <div class="mt-2">
-          <input type="email" name="email" id="email" autocomplete="email" required placeholder="Enter your username" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-800 sm:text-sm/6">
+          <input type="email" name="username" id="username" autocomplete="username" required placeholder="Enter your username" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-800 sm:text-sm/6">
         </div>
       </div>
 
@@ -104,6 +104,11 @@
     </div>
         </div> 
     </div>
+    {{#if error}}
+<script>
+    alert("{{error}}");
+</script>
+{{/if}}
 </body>
 </html>
 

@@ -1,40 +1,44 @@
 {
-    "rooms": [
-      {
-        "roomNumber": "101",
-        "roomType": "Single",
-        "roomDescription": "Cozy single room with a comfortable bed and workspace.",
-        "occupationStatus": "vacant",
-        "cleanStatus": "clean"
-      },
-      {
-        "roomNumber": "102",
-        "roomType": "Single",
-        "roomDescription": "Modern single room with city view and fast Wi-Fi.",
-        "occupationStatus": "occupied",
-        "cleanStatus": "unclean"
-      },
-      {
-        "roomNumber": "201",
-        "roomType": "Double",
-        "roomDescription": "Spacious double room with a king-size bed and seating area.",
-        "occupationStatus": "vacant",
-        "cleanStatus": "pending"
-      },
-      {
-        "roomNumber": "202",
-        "roomType": "Double",
-        "roomDescription": "Elegant double room with a balcony and garden view.",
-        "occupationStatus": "occupied",
-        "cleanStatus": "unclean"
-      },
-      {
-        "roomNumber": "301",
-        "roomType": "Suite",
-        "roomDescription": "Luxury suite with a separate living area and private Jacuzzi.",
-        "occupationStatus": "vacant",
-        "cleanStatus": "clean"
-      }
-    ]
-  }
-  
+  "rooms": [
+    {
+      "roomNumber": "101",
+      "roomType": "Single",
+      "roomDescription": "Cozy single room with a comfortable bed and workspace.",
+      "floor": "1",
+      "occupationStatus": "occupied",
+      "cleanStatus": "clean"
+    },
+    {
+      "roomNumber": "102",
+      "roomType": "Single",
+      "roomDescription": "Modern single room with city view and fast Wi-Fi.",
+      "floor": "1",
+      "occupationStatus": "vacant",
+      "cleanStatus": "pending"
+    },
+    {
+      "roomNumber": "201",
+      "roomType": "Double",
+      "roomDescription": "Spacious double room with a king-size bed and seating area.",
+      "floor": "2",
+      "occupationStatus": "occupied",
+      "cleanStatus": "clean"
+    },
+    {
+      "roomNumber": "202",
+      "roomType": "Double",
+      "roomDescription": "Elegant double room with a balcony and garden view.",
+      "floor": "2",
+      "occupationStatus": "occupied",
+      "cleanStatus": "pending"
+    },
+    {
+      "roomNumber": "301",
+      "roomType": "Suite",
+      "roomDescription": "Luxury suite with a separate living area and private Jacuzzi.",
+      "floor": "3",
+      "occupationStatus": "vacant",
+      "cleanStatus": "unclean"
+    }
+  ]
+}
