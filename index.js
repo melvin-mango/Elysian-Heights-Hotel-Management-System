@@ -68,6 +68,37 @@ app.get('/receptionist/booking', (request, response) =>{
 
 
 
+
+
+
+
+
+
+
+
+app.get('/housekeeping/dashboard', (request, response) =>{
+    response.render('housekeeping/dashboard');
+}); 
+
+app.get('/housekeeping/clean', (request, response) =>{
+    response.render('housekeeping/clean');
+});
+
+
+app.get('/housekeeping/pending', (request, response) =>{
+    response.render('housekeeping/pending');
+});
+
+
+app.get('/housekeeping/specialrequest', (request, response) =>{
+    response.render('housekeeping/specialrequest');
+});
+
+app.get('/housekeeping/unclean', (request, response) =>{
+    response.render('housekeeping/unclean');
+});
+
+
 // Server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

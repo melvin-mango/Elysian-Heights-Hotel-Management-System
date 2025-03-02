@@ -1,12 +1,44 @@
-[
-    {
-        "username": "receptionist1@gmail.com",
-        "password": "password123",
-        "role": "Receptionist"
-    },
-    {
-        "username": "housekeeping1@gmail.com",
-        "password": "cleanroom123",
-        "role": "Housekeeping"
-    }
-]
+{
+    "admin": [
+      {
+        "username": "admin@example.com",
+        "name": "Admin",
+        "password": "admin123"
+      }
+    ],
+    "receptionists": [
+      {
+        "username": "johndoe@gmail.com",
+        "name": "John Doe",
+        "password": "reception123"
+      },
+      {
+        "username": "alicebrown@gmail.com",
+        "name": "Alice Brown",
+        "password": "reception456"
+      },
+      {
+        "username": "markwilson@gmail.com",
+        "name": "Mark Wilson",
+        "password": "reception789"
+      }
+    ],
+    "housekeeping": [
+      {
+        "username": "janesmith@gmail.com",
+        "name": "Jane Smith",
+        "password": "housekeeping123"
+      },
+      {
+        "username": "emilydavis@gmail.com",
+        "name": "Emily Davis",
+        "password": "housekeeping456"
+      },
+      {
+        "username": "roberttaylor@gmail.com",
+        "name": "Robert Taylor",
+        "password": "housekeeping789"
+      }
+    ]
+  }
+  

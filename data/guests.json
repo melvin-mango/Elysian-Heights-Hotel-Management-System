@@ -1,0 +1,39 @@
+[
+    {
+      "guestName": "John Doe",
+      "email": "johndoe@gmail.com",
+      "checkInDate": "2025-02-25",
+      "checkOutDate": "2025-02-28",
+      "passportOrId": "A1234567",
+      "contact": "+1234567890",
+      "numberOfAdults": 1,
+      "numberOfChildren": 0,
+      "roomNumber": 102,
+      "occupationStatus": "checked-out"
+    },
+    {
+      "guestName": "Jane Smith",
+      "email": "janesmith@gmail.com",
+      "checkInDate": "2025-02-26",
+      "checkOutDate": "2025-03-01",
+      "passportOrId": "B2345678",
+      "contact": "+1987654321",
+      "numberOfAdults": 2,
+      "numberOfChildren": 1,
+      "roomNumber": 202,
+      "occupationStatus": "checked-out"
+    },
+    {
+      "guestName": "Alice Johnson",
+      "email": "alicejohnson@gmail.com",
+      "checkInDate": "2025-02-27",
+      "checkOutDate": "2025-03-02",
+      "passportOrId": "C3456789",
+      "contact": "+1122334455",
+      "numberOfAdults": 2,
+      "numberOfChildren": 2,
+      "roomNumber": 301,
+      "occupationStatus": "checked-in"
+    }
+  ]
+  
