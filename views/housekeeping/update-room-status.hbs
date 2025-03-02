@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Update Room Status</title>
+</head>
+<body>
+    <nav class="flex items-center h-20 w-screen bg-yellow-800 justify-between p-5">
+        <a href="/housekeeping/dashboard" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+            </svg>
+        </a>
+        <p class="text-white font-bold">Housekeeping</p>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6">Update Room Status</h1>
+
+        
+        <form action="/housekeeping/update-status" method="POST" class="space-y-6">
+            <div class="flex flex-col">
+                <label for="roomNumber" class="text-sm font-medium">Room Number</label>
+                <input type="number" id="roomNumber" name="roomNumber" required class="w-full border p-2 rounded">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="status" class="text-sm font-medium">New Status</label>
+                <select id="status" name="status" required class="w-full border p-2 rounded">
+                    <option value="Clean">Clean</option>
+                    <option value="Unclean">Unclean</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Special Requests">Special Requests</option>
+                </select>
+            </div>
+
+            <button type="submit" class="bg-yellow-600 text-white px-6 py-2 rounded">Update Status</button>
+        </form>
+    </div>
+</body>
+</html>
