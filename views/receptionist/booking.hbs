@@ -7,13 +7,23 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <title>Home</title>
     <style>
+
+        .Back{
+            position: absolute;
+            z-index: -1;
+        }
       
     </style>
 </head>
 <body>
+<div class="Back w-screen h-screen">
 
+<img src="/img/back.jpeg" alt="" class="w-screen h-4/9">
+<div class="w-screen h-5/9 bg-white"></div>
+
+</div>
     <div x-data="{ open: false }" @click.away="open = false" class="relative w-full h-screen">
-    <nav class="flex item-center h-16 w-screen justify-between p-5 md:px-10 lg:px-20 xl:px-40 2xl:px-60" style="background-color: #604020;">
+    <nav class="flex item-center h-16 w-screen justify-between p-5 md:px-10 lg:px-20 xl:px-40 2xl:px-60" style="background-color: #6040208f ;">
         <div class="flex items-start justify-between space-x-10">
  <button @click="open = true" class="text-white ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -55,8 +65,8 @@
             </div>
             <div class="px-4">            
             <nav class="py-12 space-y-2 rounded-sm " style="background-color: #ac73395e;">
-                <a href="/receptionist/dashboard" class="block px-4 py-2 text-white text-xl " style="background-color: #cc99664a; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">Home</a> 
-                <a href="/receptionist/booking" class="block px-4 py-2 text-white text-xl ">Book</a>
+                <a href="/receptionist/dashboard" class="block px-4 py-2 text-white text-xl ">Home</a>
+                 <a href="/receptionist/booking" class="block px-4 py-2 text-white text-xl " style="background-color: #cc99664a; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">Book</a>
                 <a href="/receptionist/checkin" class="block px-4 py-2 text-white text-xl ">Check-In</a>
                 <a href="/receptionist/checkout" class="block px-4 py-2 text-white text-xl ">Check-Out</a>
                 <a href="/receptionist/assignrooms" class="block px-4 py-2 text-white text-xl ">Assign Rooms</a>
@@ -70,22 +80,90 @@
         </div>
 
 
-<div class="space-y-6 md:px-10 lg:px-20 xl:px-40 2xl:px-60">
-    <p class="text-2xl font-bold italic mt-2 ml-2" style="color: #231302; box-shadow:">Receptionist Dashboard</p>
+<div class="space-y-6 md:px-10 lg:px-20 xl:px-40 2xl:px-60" style="background: transparent;">
+    
 
-<div class="flex items-center justify-around space-x-2 p-2">
-        <div class="w-1/3 h-24 p-2 items-center justify-center flex flex-col bg-white space-y-4" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-            <p class="text-center">Available Rooms </p>
-            <p>0</p>
+<div class="flex items-center justify-center space-x-2 p-2 w-full h-screen">
+    <form class="max-w-6xl mx-auto bg-white p-6 shadow-md" style="background-color: #f5f5f594;">
+    <!-- Top Section (Horizontal Layout) -->
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-2 items-end mb-10">
+        <!-- Check-in Date -->
+        <div>
+            <label for="checkin" class="block text-md font-bold text-black">Check-in Date</label>
+            <input type="date" id="checkin" name="checkin"
+                class="w-full mt-1 p-2 " style="background-color: #6040204d;">
         </div>
-        <div class="w-1/3 h-24 p-2 items-center justify-center flex flex-col space-y-4" style="background-color: #6040208f; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-            <p class="text-center">Occupied Rooms</p>
-            <p>0</p>
+
+        <!-- Check-out Date -->
+        <div>
+            <label for="checkout" class="block text-md font-bold text-black">Check-out Date</label>
+            <input type="date" id="checkout" name="checkout"
+                class="w-full mt-1 p-2 " style="background-color: #6040204d;">
         </div>
-        <div class="w-1/3 h-24 p-2 items-center justify-center flex flex-col bg-stone-500 space-y-4" style="background-color: #6040204d; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-            <p class="text-center">Needs Cleaning</p>
-            <p>0</p>
+
+        <!-- Adults (Number Input) -->
+        <div>
+            <label for="adults" class="block text-md font-bold text-black">Adults</label>
+            <input type="number" id="adults" name="adults" min="1" value="1"
+                class="w-full mt-1 p-2" style="background-color: #6040204d;">
         </div>
+
+        <!-- Children (Number Input) -->
+        <div>
+            <label for="children" class="block text-md font-bold text-black">Children</label>
+            <input type="number" id="children" name="children" min="0" value="0"
+                class="w-full mt-1 p-2" style="background-color: #6040204d;">
+        </div>
+
+        <!-- Rooms -->
+        <div>
+            <label for="rooms" class="block text-md font-bold text-black">Rooms</label>
+            <input type="number" id="rooms" name="rooms" min="1" value="1"
+                class="w-full mt-1 p-2 "  style="background-color: #6040204d;">
+        </div>
+
+        <!-- Book Now Button -->
+        <div class="flex justify-end">
+            <button type="submit"
+                class="bg-[#604020] text-white py-2 px-4  hover:bg-opacity-90 w-full md:w-auto">
+                Book Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Section (Vertical Layout) -->
+    <div class="grid grid-cols-1 gap-4 mt-10">
+        <!-- Guest Name -->
+        <div>
+            <label for="guestName" class="block text-md  text-black">Guest Name</label>
+            <input type="text" id="guestName" name="guestName" placeholder="Full Name"
+                class="w-full mt-1 p-2"  style="background-color: #6040204d;">
+        </div>
+
+        <!-- Guest Email -->
+        <div>
+            <label for="guestEmail" class="block text-md  text-black">Guest Email</label>
+            <input type="email" id="guestEmail" name="guestEmail" placeholder="Email Address"
+                class="w-full mt-1 p-2 "  style="background-color: #6040204d;">
+        </div>
+
+        <!-- Passport/ID Number -->
+        <div>
+            <label for="passportId" class="block text-md  text-black">Passport/ID Number</label>
+            <input type="text" id="passportId" name="passportId" placeholder="Passport or ID Number"
+                class="w-full mt-1 p-2 "  style="background-color: #6040204d;">
+        </div>
+
+        <!-- Contact Number -->
+        <div>
+            <label for="contactNumber" class="block text-md  text-black">Contact Number</label>
+            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Phone Number"
+                class="w-full mt-1 p-2 "  style="background-color: #6040204d;">
+        </div>
+    </div>
+</form>
+
+
 </div> 
 
        
