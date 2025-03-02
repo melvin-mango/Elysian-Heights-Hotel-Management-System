@@ -1,19 +1,41 @@
 const express = require('express');
+const session = require('express-session');
+const fs = require('fs');
+const path = require('path');
+
 const app = express();
 const port = 3000;
 
-app.set('Views', 'Views');
+// Middleware
+app.set('views', 'Views');
 app.set('view engine', 'hbs');
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// Session configuration
+app.use(
+    session({
+        secret: 'hotel-management-secret',
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 
-app.get('/', function (request, response){
-    response.render('home');
+// Load data from JSON
+const users = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'users.json')));
+const rooms = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'rooms.json')));
+
+// Routes
+app.get('/', (req, res) => {
+    res.render('home', { error: null });
 });
+
+
 
 app.get('/receptionist/dashboard', (request, response) =>{
     response.render('receptionist/dashboard');
 });
+
 
 app.get('/receptionist/assignrooms', (request, response) =>{
     response.render('receptionist/assignrooms');
@@ -44,5 +66,9 @@ app.get('/receptionist/booking', (request, response) =>{
 });
 
 
-app.listen(port);
-console.log('server is listening on port 3000');
+
+
+// Server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});

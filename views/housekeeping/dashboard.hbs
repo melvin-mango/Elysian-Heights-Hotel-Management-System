@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Housekeeping Dashboard</title>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="flex items-center h-20 w-screen bg-yellow-800 justify-between p-5">
+        <a href="#" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+            </svg>
+        </a>
+        <p class="text-white font-bold">Housekeeping</p>
+        <a href="/logout" class="text-yellow-600 bg-white px-4 py-2 rounded shadow">Logout</a>
+    </nav>
+
+    <!-- Dashboard Heading -->
+    <div class="container mx-auto px-4 py-6">
+        <h1 class="text-2xl font-bold mb-6">Housekeeping Dashboard</h1>
+
+        <!-- Assigned Cleaning Tasks -->
+        <div class="bg-white p-6 rounded shadow mb-10">
+            <h2 class="text-xl font-bold mb-4">Pending Room Cleaning Tasks</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                {{#if cleaningTasks}}
+                    {{#each cleaningTasks}}
+                        <li>
+                            <strong>Room:</strong> {{roomNumber}}, 
+                            <strong>Status:</strong> {{status}}
+                        </li>
+                    {{/each}}
+                {{else}}
+                    <p>No tasks assigned at the moment.</p>
+                {{/if}}
+            </ul>
+        </div>
+
+        <!-- Update Room Status -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-bold mb-4">Update Room Status</h2>
+            <form action="/housekeeping/update-status" method="POST" class="space-y-4">
+                <div>
+                    <label for="roomNumber" class="block text-sm font-medium">Room Number</label>
+                    <input type="number" name="roomNumber" id="roomNumber" required class="w-full border rounded px-3 py-2">
+                </div>
+                <div>
+                    <label for="status" class="block text-sm font-medium">New Status</label>
+                    <select name="status" id="status" required class="w-full border rounded px-3 py-2">
+                        <option value="Clean">Clean</option>
+                        <option value="Needs Cleaning">Needs Cleaning</option>
+                        <option value="Occupied">Occupied</option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded shadow">Update Status</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
